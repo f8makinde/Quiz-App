@@ -170,7 +170,48 @@ progress {
 .answer {
   transform: translateX(2rem);
 }
+@media only screen and (max-width: 600px) {
+  .app-header {
+    width: 40rem;
+    display:block;
+    text-align: center;
 
+  }
+  img {
+    width: 9rem;
+    order:2
+  }
+  .progress {
+    margin-bottom: 4rem;
+    display: grid;
+    justify-content: space-between;
+    gap: 1.2rem;
+    grid-template-columns: auto auto;
+    font-size: 1.8rem;
+    color: var(--color-medium);
+  }
+  
+  progress {
+    -webkit-appearance: none;
+    max-width: 100%;
+    height: 12px;
+    grid-column: 1 / -1;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 3.2rem;
+  }
+  .answer {
+    transform: translateX(0.5rem);
+  }
+  .btn-option {
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: left;
+  }
+}
 .result {
   background-color: var(--color-theme);
   color: var(--color-light);
