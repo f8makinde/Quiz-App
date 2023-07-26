@@ -92,7 +92,7 @@ const App = () => {
   const maxPossiblePoints = questions.reduce((prev, cur) => prev + cur.points, 0)
   useEffect(() => {
   
-      fetch("http://localhost:9000/questions")
+      fetch("https://localhost:9000/questions")
       .then ((res) => res.json())
       .then((data) => dispatch({type: "dataReceived", payload: data}))
      .catch((err) => dispatch({type: "dataFailed"}))
