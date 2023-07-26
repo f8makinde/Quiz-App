@@ -23,6 +23,8 @@ const initialState = {
 const SECS_PER_QUESTION = 30
 function reducer(state, action){
   switch(action.type){
+      console.log('Default case triggered. Action:', action);
+      return state;
     case 'dataReceived':{
      return{
        ...state,
@@ -84,6 +86,7 @@ function reducer(state, action){
   }
   default:
     throw new Error("Action unknown")
+      
   }
 }
 const App = () => {
