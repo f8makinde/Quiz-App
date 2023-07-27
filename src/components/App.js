@@ -23,8 +23,8 @@ const initialState = {
 const SECS_PER_QUESTION = 30
 function reducer(state, action){
   switch(action.type){
-      console.log('Default case triggered. Action:', action);
-      return state;
+      // console.log('Default case triggered. Action:', action);
+      // return state;
     case 'dataReceived':{
      return{
        ...state,
@@ -95,7 +95,7 @@ const App = () => {
   const maxPossiblePoints = questions.reduce((prev, cur) => prev + cur.points, 0)
   useEffect(() => {
   
-      fetch("http://localhost:9000/questions")
+      fetch("/data/questions")
       .then ((res) => res.json())
       .then((data) => dispatch({type: "dataReceived", payload: data}))
      .catch((err) => dispatch({type: "dataFailed"}))
