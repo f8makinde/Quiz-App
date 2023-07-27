@@ -22,73 +22,74 @@ const initialState = {
 }
 const SECS_PER_QUESTION = 30
 function reducer(state, action){
-  switch(action.type){
-      // console.log('Default case triggered. Action:', action);
-      // return state;
-    case 'dataReceived':{
-     return{
-       ...state,
+  switch (action.type) {
+  case 'dataReceived': {
+    return {
+      ...state,
       questions: action.payload,
-      status: "ready"
-    }
+      status: 'ready',
+    };
   }
-  case "dataFailed":{
-    return{
+  case 'dataFailed': {
+    console.log('log data load error');
+    return {
       ...state,
-      status: "error"
-      console.log("log data load errror")
-    }
+      questions: [],
+      status: 'error',
+    };
   }
-  case "start":{
-    return{
+  case 'start': {
+    return {
       ...state,
-      status: "active",
-      secondsRemaining: state.questions.length * SECS_PER_QUESTION
-    }
+      status: 'active',
+      secondsRemaining: state.questions.length * SECS_PER_QUESTION,
+    };
   }
-    case "newAnswer":{
-      const question = state.questions.at(state.index)
-      return{
-        ...state, 
-        answer: action.payload,
-        points: action.payload === question.correctOption ? state.points + question.points : state.points
-      }
+  case 'newAnswer': {
+    const question = state.questions[state.index]; // Use array indexing instead of at()
+    return {
+      ...state,
+      answer: action.payload,
+      points: action.payload === question.correctOption ? state.points + question.points : state.points,
+    };
   }
-  case "nextQuestion":{
-    return{
+  case 'nextQuestion': {
+    return {
       ...state,
       index: state.index + 1,
-      answer: null
-    }
+      answer: null,
+    };
   }
-  case "finish":{
-    return{
+  case 'finish': {
+    return {
       ...state,
-      status: "finished",
-      highScore: state.points > state.highScore ? state.points : state.highScore
-    }
+      status: 'finished',
+      highScore: state.points > state.highScore ? state.points : state.highScore,
+    };
   }
-  case "restart":{
-    return {...initialState, questions: state.questions, status: "ready"}
-    // return{
+  case 'restart': {
+    return { ...initialState, questions: state.questions, status: 'ready' };
+    // Alternatively, you can reset only specific properties as shown below:
+    // return {
     //   ...state,
     //   index: 0,
     //   points: 0,
     //   highScore: 0,
-    //   answer:null,
-    //   status: "ready",
-    // }
+    //   answer: null,
+    //   status: 'ready',
+    // };
   }
-  case "tick":{
-    return{
-       ...state, secondsRemaining: state.secondsRemaining - 1,
-       status: state.secondsRemaining === 0 ? "finished" : state.status
-    }
+  case 'tick': {
+    return {
+      ...state,
+      secondsRemaining: state.secondsRemaining - 1,
+      status: state.secondsRemaining === 0 ? 'finished' : state.status,
+    };
   }
   default:
-    throw new Error("Action unknown")
-      
-  }
+    throw new Error('Action unknown');
+}
+
 }
 const App = () => {
   const [{questions, status, index, answer, points, highScore, secondsRemaining}, dispatch] = useReducer(reducer, initialState)
