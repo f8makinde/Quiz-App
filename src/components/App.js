@@ -36,6 +36,7 @@ function reducer(state, action){
     return{
       ...state,
       status: "error"
+      console.log("log data load errror")
     }
   }
   case "start":{
