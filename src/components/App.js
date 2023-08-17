@@ -102,7 +102,6 @@ const App = () => {
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
-
   return (
     <div className='app'>
         <Header />
