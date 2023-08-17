@@ -93,13 +93,12 @@ const App = () => {
   const [{questions, status, index, answer, points, highScore, secondsRemaining}, dispatch] = useReducer(reducer, initialState)
   const numQuestions = questions.length;
   const maxPossiblePoints = questions.reduce((prev, cur) => prev + cur.points, 0)
-  useEffect(() => {
-  
-      fetch("/questions")
-      .then ((res) => res.json())
-      .then((data) => dispatch({type: "dataReceived", payload: data}))
-     .catch((err) => dispatch({type: "dataFailed"}))
-  }, [])
+  useEffect(function () {
+    fetch("http://localhost:9000/questions")
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: "dataReceived", payload: data }))
+      .catch((err) => dispatch({ type: "dataFailed" }));
+  }, []);
   return (
     <div className='app'>
         <Header />
